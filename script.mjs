@@ -1,12 +1,10 @@
-import { createServer } from "node:http";
-const hostname = "127.0.0.1";
-const port = 3000;
+import http from "http";
+import myDateTime from "./module.mjs";
 
-const server = createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/plain");
-  res.end("Hello world");
-});
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+http
+  .createServer(function (req, res) {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.write("The current date is " + myDateTime());
+    res.end();
+  })
+  .listen(8080);
